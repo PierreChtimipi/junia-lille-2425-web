@@ -30,3 +30,19 @@ describe("About", () => {
     })
   });
 });
+
+describe("Create Todo", () => {
+  it("creates a new todo", async () => {
+    // Given
+    render(<MemoryRouter><App /></MemoryRouter>);
+    // When
+    const $input = screen.getByRole("textbox", { name: "New Todo" });
+    const $button = screen.getByRole("button", { name: "Create" });
+    userEvent.type($input, "New Todo");
+    userEvent.click($button);
+    // Then
+    await waitFor(() => {
+      expect(screen.getByRole("listitem", { name: /todo : New Todo/ })).toBeInTheDocument();
+    });
+  });
+});

@@ -2,11 +2,29 @@ import { useState } from "react";
 import Todo from "@components/Todo";
 import Add from "@components/Add";
 import { type todo } from "../../types";
-import { data } from "../../data";
+
+import { useEffect } from "react";
 
 const Dashboard = () => {
-  const [todos, setTodos] = useState(data);
+  const [todos, setTodos] = useState<todo[]>([]);
   const [filterByNotDone, setFilterByNotDone] = useState(true);
+
+  useEffect(() => {
+    const fetchTodos = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/todos");
+        const data = await response.json();
+        setTodos(data);
+        console.log(data);
+      } catch (error) {
+        console.error("Failed to fetch todos:", error);
+      }
+    };
+    fetchTodos();
+  }, []);
+
+  
+
   return <>
     <h2>Dashboard</h2>
     <label htmlFor="displayAllTodos">Afficher toutes les todos</label> <input type="checkbox" name="displayAllTodos" id="displayAllTodos" checked={!filterByNotDone} onChange={() => setFilterByNotDone(filterByNotDone => !filterByNotDone)} />

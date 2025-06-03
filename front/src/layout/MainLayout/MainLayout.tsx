@@ -15,7 +15,7 @@ const MainLayout = () => (<>
             <Link to="/about">About</Link>
           </li>
           <li>
-            <Link to="details/42">Details</Link>
+            <Link to="details/testID">Details</Link>
           </li>
         </ul>
       </nav>

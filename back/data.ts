@@ -1,6 +1,4 @@
-import { type todo } from "./types";
-
-export const data: todo[] = [
+export const data = [
   {
     id: 1,
     label: "Finaliser le rapport mensuel",
@@ -27,7 +25,7 @@ export const data: todo[] = [
     label: "Préparation entretien d'embauche",
     tags: ["carrière", "préparation"],
     deadline: new Date("2024-03-28T10:00:00"),
-    done: false
+    done: true
   },
   {
     id: 5,
