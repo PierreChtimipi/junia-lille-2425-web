@@ -7,7 +7,7 @@ import { getTodos } from "../../services";
 
 const Dashboard = () => {
   const [todos, setTodos] = useState<todo[]>([]);
-  const { data, error, isLoading } = useQuery<todo[]>({ queryKey: ['todos'], queryFn: getTodos })
+  const { data, error, isLoading } = useQuery<todo[]>({ queryKey: ['todos'], queryFn: getTodos });
 
   const [filterByNotDone, setFilterByNotDone] = useState(true);
   return <>
@@ -17,9 +17,9 @@ const Dashboard = () => {
         {
           data?.filter(({ done }) => {
             if (filterByNotDone) {
-              return !done
+              return !done;
             }
-            return true
+            return true;
           })
             .map(({ id, label, deadline, done, tags }: todo) =>
               <Todo key={id} id={id} label={label} tags={tags} deadline={deadline} done={done} setTodos={setTodos} />)
@@ -29,7 +29,7 @@ const Dashboard = () => {
 
     <label htmlFor="displayAllTodos">Afficher toutes les todos</label> <input type="checkbox" name="displayAllTodos" id="displayAllTodos" checked={!filterByNotDone} onChange={() => setFilterByNotDone(filterByNotDone => !filterByNotDone)} />
 
-    {/* <Add setTodos={setTodos} /> */}
+    <Add setTodos={setTodos} />
   </>
 }
 

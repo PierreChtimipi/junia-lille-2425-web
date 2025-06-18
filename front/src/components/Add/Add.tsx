@@ -1,8 +1,18 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { type Dispatch, type FormEvent, type SetStateAction } from "react";
 
+import { addTodo } from '../../services/api';
 import { type todo } from "../../types";
 
 const Add = ({ setTodos }: { setTodos: Dispatch<SetStateAction<todo[]>> }) => {
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: addTodo,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['todos'] });
+    },
+  });
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
@@ -19,6 +29,13 @@ const Add = ({ setTodos }: { setTodos: Dispatch<SetStateAction<todo[]>> }) => {
         done: false
       }
     ]))
+
+    mutation.mutate({
+      label: form.get('label'),
+      tags: (form.get('tags') as string).split(','),
+      deadline: form.get('deadline'),
+      done: false
+    });
     // e.currentTarget.reset();
   }
   return <>

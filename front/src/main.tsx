@@ -11,6 +11,7 @@ const queryClient = new QueryClient()
 import './index.css'
 import App from './App.tsx'
 
+
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
     <QueryClientProvider client={queryClient}>

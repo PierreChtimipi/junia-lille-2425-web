@@ -13,8 +13,7 @@ function App() {
         <Route path="/details/:id" element={<Details />} />
       </Route>
     </Routes>
-
   )
 }
 
-export default App
+export default App;
